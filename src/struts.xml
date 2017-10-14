@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    
+    <constant name="struts.objectFactory" value="spring"></constant>
+    
+    <package name="crm" namespace="/" extends="struts-default">
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.RuntimeException" result="error"></exception-mapping>
+        </global-exception-mappings>
+        
+        <!--class属性上填写spring中action的beanName，完全由spring管理action的生命周期,包括action的创建
+            注意：需要手动组装依赖属性-->
+        <action name="UserAction_*" class="userAction" method="{1}">
+            <result name="toHome" type="redirect">/index.htm</result>
+            <result name="error">/login.jsp</result>
+        </action>
+    </package>
+</struts>
